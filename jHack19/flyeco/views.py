@@ -24,3 +24,6 @@ def home(request):
 
 def about(request): 
     return render(request, 'flyeco/about.html', {'title':'About'}) 
+
+def search(request): 
+    return render(request, 'flyeco/search.html', {'title':'Search'}) 
