@@ -12,7 +12,6 @@ def home(request):
     return render(request, 'flyeco/home.html', context)
 
 def about(request): 
-<<<<<<< HEAD
     return render(request, 'flyeco/about.html', {'title':'About'}) 
 
 def search(request):
@@ -27,6 +26,3 @@ def search(request):
     else:
         f = query.SimpleForm()
     return render(request, 'flyeco/search.html', {'title':'Search', 'form': f}) 
-=======
-    return render(request, 'flyeco/about.html', {'title':'About'})
->>>>>>> 9a556603b9bdca94646abd9df41f74048ec0bb6d
