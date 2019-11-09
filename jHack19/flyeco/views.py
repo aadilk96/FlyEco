@@ -5,6 +5,7 @@ from .models import Post
 from . import query
 from . import skyscanner_integration
 
+from users.models import Profile
 
 deets = [
         {
@@ -49,4 +50,10 @@ def home(request):
             return render(request, 'flyeco/results.html', {'destination': destination, 'deets': data})
     else:
         f = query.SimpleForm()
-    return render(request, 'flyeco/search.html', {'title':'Search', 'form': f}) 
+    leaderBoard = [{"username": x.user.username, "points": x.points} for x in Profile._meta.model.objects.all()]
+    leaderBoard = sorted(leaderBoard, key = lambda i: i['points'], reverse=True)
+    return render(request, 'flyeco/home.html', {'form':f, 'leaderBoard':leaderBoard})
+
+def about(request): 
+    return render(request, 'flyeco/about.html', {'title':'About'}) 
+
