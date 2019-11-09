@@ -1,15 +1,16 @@
 {% extends "flyeco/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
-    {% for post in posts %}
-        <article class="media content-section">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ post.author }}</a>
-                    <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-                </div>
-                <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-                <p class="article-content">{{ post.content }}</p>
+    <h1>Search</h1>
+    <div>
+        <br>
+        <form action="" method="post" novalidate>
+            {{ form|crispy }}
+            <div  style="text-align: center;">
+                <br>
+                <input type="submit" class="btn btn-info" value="Submit">
             </div>
-        </article>
-    {% endfor %}
+            {% csrf_token %}
+        </form>
+    </div>
 {% endblock content %}
