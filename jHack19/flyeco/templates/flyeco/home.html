@@ -1,7 +1,21 @@
 {% extends "flyeco/base.html" %}
 {% load crispy_forms_tags %}
-{% block content %}
+<!-- <video autoplay muted loop id="myVideo" style="display{% if user_point > 20 %}none{% endif %}">
+    <source src="level1.mp4" type="video/mp4">
+    </video>  -->
+    {% block content %}
+    {% if user_point < 20 and user_point >= 0 %}
+    <video autoplay muted loop id="myVideo">
+        <source src="../../static/flyeco/level1.mp4" type="video/mp4">
+    </video>
+    {% elif user_point >= 20 and user_point <= 40 %}
+    <video autoplay muted loop id="myVideo">
+        <source src="../../static/flyeco/level5.mp4" type="video/mp4">
+    </video>
+    {% endif %}
+    
     <h1>Search</h1>
+
     <div>
         <br>
         <form action="" method="post" novalidate>
