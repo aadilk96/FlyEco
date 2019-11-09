@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from django import forms
 from .models import Post
 from . import query
+from users.models import Profile
 
 deets = [
         {
@@ -44,6 +45,9 @@ def home(request):
             return render(request, 'flyeco/results.html', {'destination': destination, 'deets': deets})
     else:
         f = query.SimpleForm()
+    leaderBoard = [{"username": x.user.username, "points": x.points} for x in Profile._meta.model.objects.all()]
+    print(leaderBoard)
+
     return render(request, 'flyeco/home.html', {'form':f})
 
 def about(request): 
