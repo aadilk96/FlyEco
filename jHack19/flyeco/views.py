@@ -4,20 +4,6 @@ from django import forms
 from .models import Post
 from . import query
 
-# posts = [
-#     {
-#         'author': 'aadilk',
-#         'title' : 'Blog Post 1', 
-#         'content': 'First',
-#         'date_posted': 'Nov 9, 2019'
-#     },
-#     {
-#         'author': 'test',
-#         'title' : 'Blog Post 2', 
-#         'content': 'Second',
-#         'date_posted': 'Nov 9, 2019'
-#     }
-# ]
 
 def home(request): 
     context = {
@@ -26,6 +12,7 @@ def home(request):
     return render(request, 'flyeco/home.html', context)
 
 def about(request): 
+<<<<<<< HEAD
     return render(request, 'flyeco/about.html', {'title':'About'}) 
 
 def search(request):
@@ -40,3 +27,6 @@ def search(request):
     else:
         f = query.SimpleForm()
     return render(request, 'flyeco/search.html', {'title':'Search', 'form': f}) 
+=======
+    return render(request, 'flyeco/about.html', {'title':'About'})
+>>>>>>> 9a556603b9bdca94646abd9df41f74048ec0bb6d
