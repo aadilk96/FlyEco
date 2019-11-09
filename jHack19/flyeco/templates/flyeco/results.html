@@ -3,30 +3,21 @@
 
 {% block content %}
     <h1>Search</h1>
+    <br>
     {% for deet in deets %}
         <article class="media content-section">
             <div class="media-body">
                 <div class="article-metadata">
                     <a class="mr-2" href="#">{{ deet.from }} to {{ deet.to }}</a>
-                    <small class="text-muted">{{ deet.depart_date }}</small>
+                    <!-- <small class="text-muted" style="float: right;">{{ deet.depart_date }}</small> -->
                 </div>
                 <h2><a class="article-title" href="#">Carbon Emissions: {{ deet.carbon }}</a></h2>
-                <p class="article-content">Price {{ deet.price }}.00$</p>
+                <p class="article-content">Price: <b>{{ deet.price }}.00$</b></p>
+                <p class="article-content">Outbound: <b>{{ deet.depart_date }}</b></p>
+                <p class="article-content">Inbound: <b>{{ deet.return_date }}</b></p>
             </div>
         </article>
     {% endfor %}
 {% endblock content %}
 
 
-<!-- {% for post in posts %}
-        <article class="media content-section">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ post.author }}</a>
-                    <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
-                </div>
-                <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-                <p class="article-content">{{ post.content }}</p>
-            </div>
-        </article>
-    {% endfor %} -->
