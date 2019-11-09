@@ -46,9 +46,8 @@ def home(request):
     else:
         f = query.SimpleForm()
     leaderBoard = [{"username": x.user.username, "points": x.points} for x in Profile._meta.model.objects.all()]
-    print(leaderBoard)
-
-    return render(request, 'flyeco/home.html', {'form':f})
+    leaderBoard = sorted(leaderBoard, key = lambda i: i['points'], reverse=True)
+    return render(request, 'flyeco/home.html', {'form':f, 'leaderBoard':leaderBoard})
 
 def about(request): 
     return render(request, 'flyeco/about.html', {'title':'About'}) 
