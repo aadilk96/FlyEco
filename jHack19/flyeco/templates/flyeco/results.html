@@ -1,0 +1,18 @@
+{% extends "./base.html" %}
+
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+<h1>Search</h1>
+
+{% if submitted %}
+    <p class="success">
+        Your message was submitted successfully. Thank you.
+    </p>
+
+{% else %}
+<div>
+    <h2>Your destination is {{ destination }} on date {{ date }}</h2>
+</div>
+{% endif %}
+{% endblock content %}

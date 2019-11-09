@@ -1,10 +1,15 @@
-<div>
-    <h2> 
-        Search page
-    </h2>
-    <form action="/search/" method="post">
-        <label for="destination_name">Enter Destination: </label>
-        <input id="destination_name" type="text" name="destination_field" placeholder="Destination">
-        <input type="submit" value="OK">
+{% extends "./base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}Search{% endblock title %}
+
+{% block content %}
+<h1>Search</h1>
+    <div>
+    <form action="" method="post" novalidate>
+
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+        {% csrf_token %}
     </form>
 </div>
+{% endblock content %}
