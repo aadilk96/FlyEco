@@ -47,24 +47,24 @@
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar transparent navbar-inverse fixed-top">
             <div class="container">
-                <a class="navbar-brand mr-4" style="color: black;"{% url 'flyeco-home' %}">FlyEco</a>
+                <a class="navbar-brand mr-4" style="color: black; font-size: 200%;"{% url 'flyeco-home' %}">FlyEco</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                     aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" style="color: black;" href="{% url 'flyeco-home' %}">Home</a>
-                        <a class="nav-item nav-link" style="color: black;" href="{% url 'flyeco-about' %}">About</a>
+                        <a class="nav-item nav-link" style="color: black; font-size: 150%;" href="{% url 'flyeco-home' %}">Home</a>
+                        <a class="nav-item nav-link" style="color: black; font-size: 150%;" href="{% url 'flyeco-about' %}">About</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         {% if user.is_authenticated %}
-                        <a class="nav-item nav-link" style="color: black;"href="{% url 'profile' %}">Profile</a>
-                        <a class="nav-item nav-link" style="color: black;"href="{% url 'logout' %}">Logout</a>
+                        <a class="nav-item nav-link" style="color: black; font-size: 150%;"href="{% url 'profile' %}">Profile</a>
+                        <a class="nav-item nav-link" style="color: black; font-size: 150%;"href="{% url 'logout' %}">Logout</a>
                         {% else %}
-                        <a class="nav-item nav-link" style="color: black;"href="{% url 'login' %}">Login</a>
-                        <a class="nav-item nav-link" style="color: black;"href="{% url 'register' %}">Register</a>
+                        <a class="nav-item nav-link" style="color: black; font-size: 150%;"href="{% url 'login' %}">Login</a>
+                        <a class="nav-item nav-link" style="color: black; font-size: 150%;"href="{% url 'register' %}">Register</a>
                         {% endif %}
                     </div>
                 </div>
@@ -87,13 +87,13 @@
             </div>
             <div class="col-md-4">
                 <br>
-                <div class="content-section">
+                <div class="content-section bg-transparent">
                     <h3 style="text-align: center;"><span style="color:darkgreen">Eco-Warrior</span> Rankings</h3>
                     <br>
                     <!-- <p class='text-muted' style="text-align: center;">Eco-warrior rankings -->
                         <ul class="list-group">
                             {% for leader in leaderBoard %}
-                                <li class="list-group-item list-group-item-light" style="text-align: center;">{{ leader.username }}: <b>{{ leader.points }}</b></li>
+                                <li class="list-group-item list-group-item-light" style="text-align: center;">{{ leader.username }}: <b style="color: darkgreen;">{{ leader.points }}</b></li>
                             {% endfor %}
                         </ul>
                     </p>

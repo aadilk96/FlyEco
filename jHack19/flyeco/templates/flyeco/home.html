@@ -24,7 +24,7 @@
     </video>
     {% endif %}
     
-    <h1>Search</h1>
+    <h1 style="color:darkgreen">Search Flights</h1>
 
     <div>
         <br>
@@ -32,7 +32,7 @@
             {{ form|crispy }}
             <div  style="text-align: center;">
                 <br>
-                <input type="submit" class="btn btn-info" value="Submit">
+                <input type="submit" class="btn btn-info bg-steel" value="Submit">
             </div>
             {% csrf_token %}
         </form>
