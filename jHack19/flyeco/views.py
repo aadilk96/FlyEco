@@ -34,9 +34,6 @@ deets = [
     }
 ]
 
-def about(request): 
-    return render(request, 'flyeco/about.html', {'title':'About'}) 
-
 def home(request): 
     if request.method == "POST":
         f = query.SimpleForm(request.POST)
