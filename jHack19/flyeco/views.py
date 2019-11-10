@@ -47,7 +47,10 @@ def home(request):
             date_return = f.cleaned_data.get("date_return")
             #call to api methods
             data = skyscanner_integration.handle_query(destination,departure,date_depart,date_return)
-            return render(request, 'flyeco/results.html', {'destination': destination, 'deets': data})
+            leaderBoard = [{"username": x.user.username, "points": x.points} for x in Profile._meta.model.objects.all()]
+            leaderBoard = sorted(leaderBoard, key = lambda i: i['points'], reverse=True)
+            user_points = request.user.profile.points
+            return render(request, 'flyeco/results.html', {'destination': destination, 'deets': data, 'leaderBoard':leaderBoard, 'user_point': user_points})
     else:
         f = query.SimpleForm()
     leaderBoard = [{"username": x.user.username, "points": x.points} for x in Profile._meta.model.objects.all()]

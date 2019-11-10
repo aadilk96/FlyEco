@@ -14,8 +14,19 @@ def get_place_id(query_str, value="PlaceId"):
     url = base_url+place_url_ext
     querystring = {"query":query_str}
     response = requests.request("GET", url, headers=default_header, params=querystring)
-    if response.ok:
-        return response.json().get("Places",[{}])[0].get(value, None).split("-")[0]
+    if len(response.json().get("Places",[{}])) == 0:
+        return None
+    first = response.json().get("Places",[{}])[0].get(value, None).split("-")[0]
+    if len(first) < 4:
+        return first
+    if len(response.json().get("Places",[{}])) > 1:
+        second = response.json().get("Places",[{}])[1].get(value, None).split("-")[0]
+        if len(second) < 4:
+            return second
+    if len(response.json().get("Places",[{}])) > 2:
+        third = response.json().get("Places",[{}])[2].get(value, None).split("-")[0]
+        if len(third) < 4:
+            return third
     return None
 
 def get_routes(dest_id, depart_id, date_depart, date_return):
