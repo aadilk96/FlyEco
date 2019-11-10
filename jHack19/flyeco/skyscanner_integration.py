@@ -1,4 +1,5 @@
 import requests
+import random
 
 default_market = "DE"
 default_currency = "EUR"
@@ -17,15 +18,16 @@ def get_place_id(query_str, value="PlaceId"):
     if len(response.json().get("Places",[{}])) == 0:
         return None
     first = response.json().get("Places",[{}])[0].get(value, None).split("-")[0]
-    if len(first) < 4:
+    print("first is", first)
+    if len(first) < 4 or value != "PlaceId":
         return first
     if len(response.json().get("Places",[{}])) > 1:
         second = response.json().get("Places",[{}])[1].get(value, None).split("-")[0]
-        if len(second) < 4:
+        if len(second) < 4 or value != "PlaceId":
             return second
     if len(response.json().get("Places",[{}])) > 2:
         third = response.json().get("Places",[{}])[2].get(value, None).split("-")[0]
-        if len(third) < 4:
+        if len(third) < 4 or value != "PlaceId":
             return third
     return None
 
@@ -38,16 +40,27 @@ def get_routes(dest_id, depart_id, date_depart, date_return):
 
     return [{}]
 
-def get_emissions(dest_id, depart_id):
-    url = base_url+eco_url_ext
-    querystring = {"routes": depart_id+","+dest_id}
-    response = requests.request("GET", url, headers=default_header, params=querystring)
-    print("the response is", response.text)
-    if response.ok:
-        return response.json()[0].get("perSeatEmissions")
+def get_emissions(dest_id="", depart_id=""):
+    # url = base_url+eco_url_ext
+    # querystring = {"routes": depart_id+","+dest_id}
+    # response = requests.request("GET", url, headers=default_header, params=querystring)
+    # print("the response is", response.text)
+    # if response.ok:
+    #     return response.json()[0].get("perSeatEmissions")
+    return random.randrange(47, 428)
 
-    return ""
 
+def get_points(selected_emmisions, max_emmsions=428):
+    saved_emmissions = (selected_emmisions / max_emmsions) * 100
+    if 60 > saved_emmissions >= 40:
+        POINTS = 2.5
+    elif 40 > saved_emmissions >= 20:
+        POINTS = 5
+    elif 10 < saved_emmissions <= 20:
+        POINTS = 10
+    else:
+        POINTS = 20
+    return POINTS
 
 def handle_query(destination, departure, date_depart, date_return):
     print("handle_query called with", destination, departure, date_depart, date_return)
@@ -68,8 +81,9 @@ def handle_query(destination, departure, date_depart, date_return):
         to_append["to"] = dest_name
         to_append["depart_date"] = flight.get("OutboundLeg", {}).get("DepartureDate", "").split("T")[0]
         to_append["return_date"] = flight.get("InboundLeg", {}).get("DepartureDate", "").split("T")[0]
-        to_append["carbon"] = carbon
-        to_append["points"] = str(10)
+        carb = get_emissions()
+        to_append["carbon"] = carb
+        to_append["points"] = get_points(carb)
         parsed.append(to_append)
     print("about to return", parsed)
     return sorted(parsed, key = lambda i: i['price'])

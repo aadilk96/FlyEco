@@ -2,17 +2,38 @@
 {% block title %}Search{% endblock title %}
 
 {% block content %}
+{% if user_point < 20 and user_point >= 0 %}
+    <video autoplay muted loop id="myVideo">
+        <source src="../../static/flyeco/level1.mp4" type="video/mp4">
+    </video>
+    {% elif user_point >= 20 and user_point <= 90 %}
+    <video autoplay muted loop id="myVideo">
+        <source src="../../static/flyeco/level2.mp4" type="video/mp4">
+    </video>
+    {% elif user_point >= 40 and user_point <= 60 %}
+    <video autoplay muted loop id="myVideo">
+        <source src="../../static/flyeco/level3.mp4" type="video/mp4">
+    </video>
+    {% elif user_point >= 60 and user_point <= 80 %}
+    <video autoplay muted loop id="myVideo">
+        <source src="../../static/flyeco/level4.mp4" type="video/mp4">
+    </video>
+    {% elif user_point >= 80 %}
+    <video autoplay muted loop id="myVideo">
+        <source src="../../static/flyeco/level5.mp4" type="video/mp4">
+    </video>
+    {% endif %}
 <h1>Search</h1>
 <br>
 {% for deet in deets %}
 <article class="media content-section">
     <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="#">{{ deet.from }} to {{ deet.to }}</a>
+            <p class="mr-2">{{ deet.from }} to {{ deet.to }}</p>
             <!-- <small class="text-muted" style="float: right;">{{ deet.depart_date }}</small> -->
         </div>
         <h2><a class="article-title" href="#">Carbon Emissions: {{ deet.carbon }}</a></h2>
-        <form action='increasePoints/' class="pull-right" method='POST' novalidate>
+        <form action='increasePoints/{{ deet.points }}' class="pull-right" method='POST' novalidate>
             <button type='submit'>Book</button>
             {% csrf_token %}
         </form>

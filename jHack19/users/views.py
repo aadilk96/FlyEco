@@ -18,4 +18,5 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    user_points = request.user.profile.points
+    return render(request, 'users/profile.html', {"user_point": user_points})
