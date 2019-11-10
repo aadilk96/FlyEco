@@ -75,10 +75,14 @@ def increasePoints(request, pts):
     account_sid = 'AC90ecfcae0dba57ce05ff3ea8c6d57942'
     auth_token = '2c0c401ca65a5427344f3a6d4f575952'
     client = Client(account_sid, auth_token)
+    try:
+        phone_num = request.user.profile.phone
+    except:
+        phone_num = "+4917628596445"
     message = client.messages.create(
         body='Congratulations! You now have {} pts! Good job!'.format(request.user.profile.points + pts),
         from_='+12053418399',
-        to='+4915226542018'
+        to=phone_num
     )
     if request.method == "POST":
         setattr(request.user.profile, "points",
