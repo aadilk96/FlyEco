@@ -2,28 +2,24 @@
 {% block title %}Search{% endblock title %}
 
 {% block content %}
-    <h1>Search</h1>
-    <br>
-    {% for deet in deets %}
-        <article class="media content-section">
-            <div class="media-body">
-                <div class="article-metadata">
-                    <a class="mr-2" href="#">{{ deet.from }} to {{ deet.to }}</a>
-                    <form action="" method="post" novalidate>
-                        <div style="text-align: center;">
-                            <br>
-                            <input type="submit" class="btn btn-info" value="Book">
-                        </div>
-                    </form>
-                    <!-- <small class="text-muted" style="float: right;">{{ deet.depart_date }}</small> -->
-                </div>
-                <h2><a class="article-title" href="#">Carbon Emissions: {{ deet.carbon }}</a></h2>
-                <p class="article-content">Price: <b>{{ deet.price }}.00$</b></p>
-                <p class="article-content">Outbound: <b>{{ deet.depart_date }}</b></p>
-                <p class="article-content">Inbound: <b>{{ deet.return_date }}</b></p>
-            </div>
-        </article>
-    {% endfor %}
+<h1>Search</h1>
+<br>
+{% for deet in deets %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ deet.from }} to {{ deet.to }}</a>
+            <!-- <small class="text-muted" style="float: right;">{{ deet.depart_date }}</small> -->
+        </div>
+        <h2><a class="article-title" href="#">Carbon Emissions: {{ deet.carbon }}</a></h2>
+        <form action='increasePoints/' class="pull-right" method='POST' novalidate>
+            <button type='submit'>Book</button>
+            {% csrf_token %}
+        </form>
+        <p class="article-content">Price: <b>{{ deet.price }}.00$</b></p>
+        <p class="article-content">Outbound: <b>{{ deet.depart_date }}</b></p>
+        <p class="article-content">Inbound: <b>{{ deet.return_date }}</b></p>
+    </div>
+</article>
+{% endfor %}
 {% endblock content %}
-
-

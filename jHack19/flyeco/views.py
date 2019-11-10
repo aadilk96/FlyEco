@@ -55,6 +55,14 @@ def home(request):
     user_points = request.user.profile.points
     return render(request, 'flyeco/home.html', {'form':f, 'leaderBoard':leaderBoard, 'user_point': user_points})
 
-def about(request): 
-    return render(request, 'flyeco/about.html', {'title':'About'}) 
+def increasePoints(request, pts=10): 
+    f = query.SimpleForm()
+    if request.method == "POST": 
+        request.user.profile.points += pts
+    leaderBoard = [{"username": x.user.username, "points": x.points} for x in Profile._meta.model.objects.all()]
+    leaderBoard = sorted(leaderBoard, key = lambda i: i['points'], reverse=True)
+    user_points = request.user.profile.points
+    return render(request, 'flyeco/home.html', {'form':f, 'leaderBoard':leaderBoard, 'user_point': user_points})
 
+def about(request): 
+    return render(request, 'flyeco/about.html', {'title':'About'})
