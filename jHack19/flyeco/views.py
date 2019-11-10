@@ -77,6 +77,8 @@ def increasePoints(request, pts):
     client = Client(account_sid, auth_token)
     try:
         phone_num = request.user.profile.phone
+        if ("+49") not in phone_num:
+            phone_num = "+4917628596445"
     except:
         phone_num = "+4917628596445"
     message = client.messages.create(

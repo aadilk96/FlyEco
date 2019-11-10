@@ -6,7 +6,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     points = models.IntegerField(default=0)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    phone = models.TextField(default='N/A')
+    phone = models.TextField(default='+4917628596445')
     def __str__(self): 
         return "%s"%self.user.username
 
