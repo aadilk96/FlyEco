@@ -53,7 +53,7 @@ def get_emissions(dest_id="", depart_id=""):
 def get_points(selected_emmisions, max_emmsions=428):
     saved_emmissions = (selected_emmisions / max_emmsions) * 100
     if 60 > saved_emmissions >= 40:
-        POINTS = 2.5
+        POINTS = 2
     elif 40 > saved_emmissions >= 20:
         POINTS = 5
     elif 10 < saved_emmissions <= 20:
