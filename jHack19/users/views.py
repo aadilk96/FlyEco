@@ -19,4 +19,7 @@ def register(request):
 @login_required
 def profile(request):
     user_points = request.user.profile.points
-    return render(request, 'users/profile.html', {"user_point": user_points})
+    leaderBoard = [{"username": x.user.username, "points": x.points}
+                   for x in Profile._meta.model.objects.all()]
+    leaderBoard = sorted(leaderBoard, key=lambda i: i['points'], reverse=True)
+    return render(request, 'users/profile.html', {"user_point": user_points, 'leaderBoard': leaderBoard})

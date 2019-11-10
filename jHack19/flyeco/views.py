@@ -4,6 +4,8 @@ from django import forms
 from .models import Post
 from . import query
 from . import skyscanner_integration
+from twilio.rest import Client
+
 
 from users.models import Profile
 
@@ -33,14 +35,6 @@ deets = [
         "carbon": "147"
     }
 ]
-
-def about(request): 
-    if request.method == "POST": 
-        f = query.SimpleForm(request.POST)
-        if f.is_valid(): 
-            user_points = request.user.profile.points
-            return render(request, 'flyeco/about.html', {'title':'About'}, {'user_point': user_points}) 
-    return render(request, 'flyeco/about.html', {'title':'About'}) 
 
 
 def home(request): 
@@ -77,19 +71,15 @@ def home(request):
 
 
 def increasePoints(request, pts):
-    from twilio.rest import Client
-    # Your Account Sid and Auth Token from twilio.com/console
-    # DANGER! This is insecure. See http://twil.io/secure
+    print("Got points", pts)
     account_sid = 'AC90ecfcae0dba57ce05ff3ea8c6d57942'
     auth_token = '2c0c401ca65a5427344f3a6d4f575952'
     client = Client(account_sid, auth_token)
     message = client.messages.create(
-        body='Whadup Henooooooochi!',
+        body='Congratulations! You now have {} pts! Good job!'.format(request.user.profile.points + pts),
         from_='+12053418399',
         to='+4915226542018'
     )
-    print(message.sid)
-    print("Got points", pts)
     if request.method == "POST":
         setattr(request.user.profile, "points",
                 request.user.profile.points + pts)
