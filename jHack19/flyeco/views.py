@@ -34,8 +34,16 @@ deets = [
     }
 ]
 
+def about(request): 
+    if request.method == "POST": 
+        f = query.SimpleForm(request.POST)
+        if f.is_valid(): 
+            user_points = request.user.profile.points
+            return render(request, 'flyeco/about.html', {'title':'About'}, {'user_point': user_points}) 
+    return render(request, 'flyeco/about.html', {'title':'About'}) 
 
-def home(request):
+
+def home(request): 
     if request.method == "POST":
         f = query.SimpleForm(request.POST)
         if f.is_valid():

@@ -24,6 +24,27 @@
     </video>
     {% endif %}
 <h1>Search</h1>
+{% if user_point < 20 and user_point >= 0 %}
+<video autoplay muted loop id="myVideo">
+    <source src="../../static/flyeco/level1.mp4" type="video/mp4">
+</video>
+{% elif user_point >= 20 and user_point <= 90 %}
+<video autoplay muted loop id="myVideo">
+    <source src="../../static/flyeco/level2.mp4" type="video/mp4">
+</video>
+{% elif user_point >= 40 and user_point <= 60 %}
+<video autoplay muted loop id="myVideo">
+    <source src="../../static/flyeco/level3.mp4" type="video/mp4">
+</video>
+{% elif user_point >= 60 and user_point <= 80 %}
+<video autoplay muted loop id="myVideo">
+    <source src="../../static/flyeco/level4.mp4" type="video/mp4">
+</video>
+{% elif user_point >= 80 and user_point <= 100 %}
+<video autoplay muted loop id="myVideo">
+    <source src="../../static/flyeco/level5.mp4" type="video/mp4">
+</video>
+{% endif %}
 <br>
 {% for deet in deets %}
 <article class="media content-section">
