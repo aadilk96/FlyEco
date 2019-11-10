@@ -98,4 +98,5 @@ def increasePoints(request, pts):
 
 
 def about(request):
-    return render(request, 'flyeco/about.html', {'title': 'About'})
+    user_points = request.user.profile.points
+    return render(request, 'flyeco/about.html', {'title': 'About', "user_point": user_points})
