@@ -52,12 +52,13 @@ def handle_query(destination, departure, date_depart, date_return):
     parsed = []
     for flight in retrieved:
         to_append = {}
-        to_append["price"] = int(flight.get("MinPrice"))
+        to_append["price"] = int(flight.get("MinPrice", 0))
         to_append["from"] = depart_name
         to_append["to"] = dest_name
         to_append["depart_date"] = flight.get("OutboundLeg", {}).get("DepartureDate", "").split("T")[0]
         to_append["return_date"] = flight.get("InboundLeg", {}).get("DepartureDate", "").split("T")[0]
         to_append["carbon"] = carbon
+        to_append["points"] = str(10)
         parsed.append(to_append)
     print("about to return", parsed)
     return sorted(parsed, key = lambda i: i['price'])
